@@ -1,0 +1,129 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width"> 
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+  <title>Valhpac</title>
+  <script>
+  $(document).ready(function() {
+            var options = {
+                chart: {
+                    renderTo: 'container',
+                    type: 'bar',
+                    marginRight: 130,
+                    marginBottom: 25
+                },
+                title: {
+                    text: 'Project Requests',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    title: {
+                        text: 'Requests'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function() {
+                            return '<b>'+ this.series.name +'</b><br/>'+
+                            this.x +': '+ this.y;
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -10,
+                    y: 100,
+                    borderWidth: 0
+                },
+                series: []
+            }
+            
+            $.getJSON("valhpac.com/VHPMOVIL/data.php", function(json) {
+                options.xAxis.categories = json[0]['data'];
+                options.series[0] = json[1];
+                options.series[1] = json[2];
+                options.series[2] = json[3];
+                chart = new Highcharts.Chart(options);
+            });
+        }); 
+		</script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  </head>
+<body> 
+<div data-role="page" id="home">
+	<div data-role="header">
+		<h1>VHP-MOVIL</h1>
+		</div>	
+		<div data-role="content">	
+    <ul data-role="listview" data-inset="true">
+    <li>
+      <a href="#Inicio">Reporte de Pallets </a>
+    </li>
+    <li>
+      <a href="#Embarques">Reporte de Embarcarciones</a>
+    </li>
+</ul>
+</div>	
+ 
+</div>
+<div data-role="page" id="Inicio">
+	<div data-role="header">
+<h1>Reporte de Pallets </h1>
+    <a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>
+</div>	
+	<div data-role="navbar">
+      <ul>
+        <li><a href="#" class="ui-btn-active" >Nave 1</a></li>
+        <li><a href="#" ">Nave 2</a></li>
+      </ul>
+    </div>
+	
+	<div data-role="main" class="ui-content">
+    <div data-role="collapsible" data-theme="a" data-content-theme="a">
+    <h4>Tomate Saladette</h4>
+   <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+</div>
+<div data-role="collapsible" data-theme="a" data-content-theme="b">
+    <h4>Tomate TOV</h4>
+    <p>I'm the collapsible content with a themed content block set to "b".</p>
+</div>
+<div data-role="collapsible" data-theme="a" data-content-theme="b">
+    <h4>Tomate Bola </h4>
+    <p>I'm the collapsible content with a themed content block set to "b".</p>
+</div>
+<div data-role="collapsible" data-theme="a" data-content-theme="b">
+    <h4>Pepino</h4>
+    <p>I'm the collapsible content with a themed content block set to "b".</p>
+</div>
+<div data-role="collapsible" data-theme="a" data-content-theme="b">
+    <h4>Pepino Europero</h4>
+    <p>I'm the collapsible content with a themed content block set to "b".</p>
+	
+	
+    </div>
+  </div>
+   
+   
+   
+</div>
+</body>
+</html>
+
